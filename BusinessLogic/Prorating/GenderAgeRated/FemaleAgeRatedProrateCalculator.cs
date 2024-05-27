@@ -3,9 +3,9 @@ using BusinessLogic.Prorating.AgeRated;
 
 namespace BusinessLogic.Prorating.GenderAgeRated
 {
-    public class FemaleAgeRatedProrateCalculator : BaseGenderAgeRatedProrateCalculator, IProrateCalculator<int>
+    public class FemaleAgeRatedProrateCalculator : AgeRatedProrateCalculator, IProrateCalculator<int>
     {
-        public FemaleAgeRatedProrateCalculator(): base(AgeRatedModels.FemaleModel)
+        public FemaleAgeRatedProrateCalculator(): base(RateModels.FemaleModel)
         {
 
         }

@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Prorating.FlatRate;
+﻿using BusinessLogic.Prorating;
 using System.Text.Json;
 
 namespace ConsoleApp.JsonFile

@@ -1,8 +1,8 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Prorating.AgeRated;
-using BusinessLogic.Prorating.FlatRate;
 using BusinessLogic.Prorating.Abstract;
 using BusinessLogic.Prorating.GenderAgeRated;
+using BusinessLogic.Prorating;
 
 
 namespace ConsoleApp
@@ -14,11 +14,6 @@ namespace ConsoleApp
         private DateTime _inputDate;
         private Gender _gender = 0;
         private int _age = 0;
-        private readonly Settings _settings;
-        public UserInteractionHandler(Settings settings)
-        {
-            _settings = settings;
-        }
         public void HandleUserInteraction()
         {
             var exitRequested = false;
@@ -56,7 +51,7 @@ namespace ConsoleApp
         }
         private void HandleFlatRatedCase()
         {
-            var calculator = new FlatRateProrateCalculator();
+            var calculator = new BaseProrateCalculator();
             while (true)
             {
                 ReadCalculationTypeInput();
@@ -64,11 +59,12 @@ namespace ConsoleApp
                 ReadDateTimeInput();
                 var result = _calculationType switch
                 {
-                    CalculationType.ByDays => calculator.CalculateByDays(_settings.FlatRateFullPremium, _inputDate),
-                    CalculationType.ByMonths => calculator.CalculateByMonths(_settings.FlatRateFullPremium, _inputDate),
+                    CalculationType.ByDays => calculator.CalculateByDays(RateModels.FlatRateFullPremium, _inputDate),
+                    CalculationType.ByMonths => calculator.CalculateByMonths(RateModels.FlatRateFullPremium, _inputDate),
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
-            Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine("###################################################");
             }
         }
         private void HandleAgeRatedCase()
@@ -87,6 +83,7 @@ namespace ConsoleApp
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
                 Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine("###################################################");
             }
         }
         private void HandleGenderAgeRatedCase()
@@ -112,6 +109,7 @@ namespace ConsoleApp
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
                 Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine("###################################################");
             }
         }
         private void ReadDateTimeInput()
@@ -168,7 +166,7 @@ namespace ConsoleApp
         {
             while (true)
             {
-                Console.WriteLine("Enter the age:");
+                Console.Write("Enter the age: ");
                 var userInput = Console.ReadLine();
                 if (!int.TryParse(userInput, out _age) || _age<0 || _age > 100)
                 {

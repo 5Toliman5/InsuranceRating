@@ -1,19 +1,27 @@
 ﻿using BusinessLogic.Prorating.Abstract;
-using BusinessLogic.Prorating.FlatRate;
 
 namespace BusinessLogic.Prorating.AgeRated
 {
-    public class AgeRatedProrateCalculator : BaseProrateCalculator, IProrateCalculator<AgeRatedCalculateParameters>
+    public class AgeRatedProrateCalculator : BaseProrateCalculator, IProrateCalculator<int>
     {
-        public virtual decimal CalculateByDays(AgeRatedCalculateParameters parameters, DateTime startDate)
+        protected readonly Func<int, decimal> RateModel;
+        public AgeRatedProrateCalculator()
         {
-            var fullPremium = parameters.RateModel(parameters.Age);
+            this.RateModel = RateModels.StandardAgeModel;
+        }
+        public AgeRatedProrateCalculator(Func<int, decimal> rateModel)
+        {
+            this.RateModel = rateModel;
+        }
+        public decimal CalculateByDays(int age, DateTime startDate)
+        {
+            var fullPremium = this.RateModel(age);
             return base.CalculateByDays(fullPremium, startDate);
         }
 
-        public virtual decimal CalculateByMonths(AgeRatedCalculateParameters parameters, DateTime startDate)
+        public decimal CalculateByMonths(int age, DateTime startDate)
         {
-            var fullPremium = parameters.RateModel(parameters.Age);
+            var fullPremium = this.RateModel(age);
             return base.CalculateByMonths(fullPremium, startDate);
         }
     }

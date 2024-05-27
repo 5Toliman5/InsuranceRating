@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BusinessLogic.Prorating.Abstract
+﻿namespace BusinessLogic.Prorating.Abstract
 {
-    public abstract class BaseProrateCalculator : IProrateCalculator<decimal>
+    public class BaseProrateCalculator : IProrateCalculator<decimal>
     {
         public virtual decimal CalculateByDays(decimal fullPremium, DateTime startDate)
         {

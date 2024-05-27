@@ -1,8 +1,4 @@
-﻿using BusinessLogic.Prorating.FlatRate;
-using ConsoleApp;
-using ConsoleApp.JsonFile;
-using System;
-using BusinessLogic.Prorating.Abstract;
+﻿using ConsoleApp;
 namespace InsuranceRating
 {
     internal class Program
@@ -11,10 +7,7 @@ namespace InsuranceRating
         {
             try
             {
-                var settings = ReadJsonSettings();
-                if (settings == null)
-                    throw new Exception("The settings file was not found.");
-                var userInteractionHandler = new UserInteractionHandler(settings);
+                var userInteractionHandler = new UserInteractionHandler();
                 userInteractionHandler.HandleUserInteraction();
                 Environment.Exit(0);
             }
@@ -24,10 +17,5 @@ namespace InsuranceRating
             }
         }
 
-        private static Settings ReadJsonSettings()
-        {
-            IJsonFileReader<Settings> jsonFileReader = new JsonFileReader();
-            return jsonFileReader.ReadJsonFile("settings.json");
-        }
     }
 }
