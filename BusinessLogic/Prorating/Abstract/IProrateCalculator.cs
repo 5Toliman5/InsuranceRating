@@ -2,7 +2,7 @@
 {
     public interface IProrateCalculator<in T>
     {
-        decimal CalculateByDays(T inputParams, DateTime inputDate);
-        decimal CalculateByMonths(T inputParams, DateTime inputDate);
+        decimal CalculateByDays(T inputParams, DateTime startDate);
+        decimal CalculateByMonths(T inputParams, DateTime startDate);
     }
 }

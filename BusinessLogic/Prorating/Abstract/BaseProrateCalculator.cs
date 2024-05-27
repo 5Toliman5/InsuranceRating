@@ -8,17 +8,17 @@ namespace BusinessLogic.Prorating.Abstract
 {
     public abstract class BaseProrateCalculator : IProrateCalculator<decimal>
     {
-        public virtual decimal CalculateByDays(decimal fullPremium, DateTime inputDate)
+        public virtual decimal CalculateByDays(decimal fullPremium, DateTime startDate)
         {
-            var lastDayOfYear = new DateTime(inputDate.Year + 1, 1, 1);
-            var daysLeft = (lastDayOfYear - inputDate).Days;
-            var totalDays = DateTime.IsLeapYear(inputDate.Year) ? 366 : 365;
+            var lastDayOfYear = new DateTime(startDate.Year + 1, 1, 1);
+            var daysLeft = (lastDayOfYear - startDate).Days;
+            var totalDays = DateTime.IsLeapYear(startDate.Year) ? 366 : 365;
             return fullPremium / totalDays * daysLeft;
         }
-        public virtual decimal CalculateByMonths(decimal fullPremium, DateTime inputDate)
+        public virtual decimal CalculateByMonths(decimal fullPremium, DateTime startDate)
         {
             var totalMonths = 12;
-            var monthsLeft = totalMonths - inputDate.Month + 1;
+            var monthsLeft = totalMonths - startDate.Month + 1;
             return (decimal)((double)fullPremium / totalMonths * monthsLeft);
         }
 

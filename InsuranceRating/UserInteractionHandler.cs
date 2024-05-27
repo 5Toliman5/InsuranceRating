@@ -2,6 +2,7 @@
 using BusinessLogic.Prorating.AgeRated;
 using BusinessLogic.Prorating.FlatRate;
 using BusinessLogic.Prorating.Abstract;
+using BusinessLogic.Prorating.GenderAgeRated;
 
 
 namespace ConsoleApp
@@ -100,8 +101,8 @@ namespace ConsoleApp
                 ReadGenderInput();
                 calculator = _gender switch
                 {
-                    Gender.Male => new MaleAgeRatedProRateCalculator(),
-                    Gender.Female => new FemaleAgeRatedProRateCalculator(_settings.FemaleCoefficient),
+                    Gender.Male => new MaleAgeRatedProrateCalculator(),
+                    Gender.Female => new FemaleAgeRatedProrateCalculator(),
                     _ => throw new ArgumentException("Error determining the input gender")
                 };
                 var result = _calculationType switch
