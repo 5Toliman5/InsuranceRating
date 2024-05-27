@@ -63,7 +63,7 @@ namespace ConsoleApp
                     CalculationType.ByMonths => calculator.CalculateByMonths(RateModels.FlatRateFullPremium, _inputDate),
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
-                Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine($"Starting from {_inputDate.Date.ToString("yyyy-MM-dd")} to the end of current year the prorate {_calculationType} equals {result.ProratedPremium.ToString("F2")} and the full premium is {result.FullPremium.ToString("F2")}");
                 Console.WriteLine("###################################################");
             }
         }
@@ -82,7 +82,7 @@ namespace ConsoleApp
                     CalculationType.ByMonths => calculator.CalculateByMonths(_age, _inputDate),
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
-                Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine($"Starting from {_inputDate.Date.ToString("yyyy-MM-dd")} to the end of current year the prorate {_calculationType} equals {result.ProratedPremium.ToString("F2")} and the full premium is {result.FullPremium.ToString("F2")}");
                 Console.WriteLine("###################################################");
             }
         }
@@ -108,7 +108,7 @@ namespace ConsoleApp
                     CalculationType.ByMonths => calculator.CalculateByMonths(_age, _inputDate),
                     _ => throw new ArgumentException("Unknown calculation type")
                 };
-                Console.WriteLine($"Starting from {_inputDate.Date} to the end of current year the prorate {_calculationType} equals {result.ToString("F2")}");
+                Console.WriteLine($"Starting from {_inputDate.Date.ToString("yyyy-MM-dd")} to the end of current year the prorate {_calculationType} equals {result.ProratedPremium.ToString("F2")} and the full premium is {result.FullPremium.ToString("F2")}");
                 Console.WriteLine("###################################################");
             }
         }

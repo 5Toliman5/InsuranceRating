@@ -13,13 +13,13 @@ namespace BusinessLogic.Prorating.AgeRated
         {
             this.RateModel = rateModel;
         }
-        public decimal CalculateByDays(int age, DateTime startDate)
+        public (decimal FullPremium, decimal ProratedPremium) CalculateByDays(int age, DateTime startDate)
         {
             var fullPremium = this.RateModel(age);
             return base.CalculateByDays(fullPremium, startDate);
         }
 
-        public decimal CalculateByMonths(int age, DateTime startDate)
+        public (decimal FullPremium, decimal ProratedPremium) CalculateByMonths(int age, DateTime startDate)
         {
             var fullPremium = this.RateModel(age);
             return base.CalculateByMonths(fullPremium, startDate);
